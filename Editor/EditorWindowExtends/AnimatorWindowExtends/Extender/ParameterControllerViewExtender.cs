@@ -2,11 +2,11 @@
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
-using Yueby.EditorWindowExtends.AnimatorControllerToolExtends.Core;
-using Yueby.EditorWindowExtends.AnimatorControllerToolExtends.Reflections;
+using Yueby.EditorWindowExtends.AnimatorWindowExtends.Core;
+using Yueby.EditorWindowExtends.AnimatorWindowExtends.Reflections;
 using Yueby.EditorWindowExtends.Core;
 
-namespace Yueby.EditorWindowExtends.AnimatorControllerToolExtends
+namespace Yueby.EditorWindowExtends.AnimatorWindowExtends
 {
     [InitializeOnLoad]
     public class ParameterControllerViewExtender : EditorExtender<ParameterControllerViewExtender, ParameterControllerViewDrawer>
@@ -18,14 +18,14 @@ namespace Yueby.EditorWindowExtends.AnimatorControllerToolExtends
 
         static ParameterControllerViewExtender()
         {
-            AnimatorControllerToolHelper.OnAnimatorControllerToolState += OnAnimatorControllerToolState;
+            AnimatorWindowHelper.OnAnimatorControllerToolState += OnAnimatorControllerToolState;
         }
 
         public ParameterControllerViewExtender()
         {
-            if (AnimatorControllerToolHelper.Window == null) return;
+            if (AnimatorWindowHelper.Window == null) return;
 
-            _lastList = ParameterControllerViewReflect.GetParameterReorderableList(AnimatorControllerToolHelper.Window);
+            _lastList = ParameterControllerViewReflect.GetParameterReorderableList(AnimatorWindowHelper.Window);
             if (_lastList == null)
             {
                 Debug.LogWarning("Can't find parameter list, try recreate extender.");
@@ -55,7 +55,7 @@ namespace Yueby.EditorWindowExtends.AnimatorControllerToolExtends
         {
             if (state)
             {
-                if (_lastList != ParameterControllerViewReflect.GetParameterReorderableList(AnimatorControllerToolHelper.Window))
+                if (_lastList != ParameterControllerViewReflect.GetParameterReorderableList(AnimatorWindowHelper.Window))
                     Instance = null;
                 Instance ??= new ParameterControllerViewExtender();
             }
@@ -69,7 +69,7 @@ namespace Yueby.EditorWindowExtends.AnimatorControllerToolExtends
         {
             if (!IsEnabled) return;
 
-            ScrollPosition = ParameterControllerViewReflect.GetParameterScrollPosition(AnimatorControllerToolHelper.Window);
+            ScrollPosition = ParameterControllerViewReflect.GetParameterScrollPosition(AnimatorWindowHelper.Window);
 
             foreach (var drawer in ExtenderDrawers.Where(drawer => drawer.IsVisible)) drawer.OnDrawElement(rect, index, isactive, isfocused);
 
@@ -131,7 +131,7 @@ namespace Yueby.EditorWindowExtends.AnimatorControllerToolExtends
         public override void Repaint()
         {
             base.Repaint();
-            AnimatorControllerToolHelper.Window?.Repaint();
+            AnimatorWindowHelper.Window?.Repaint();
         }
     }
 }

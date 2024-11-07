@@ -7,7 +7,6 @@ namespace Yueby.EditorWindowExtends.HarmonyPatches.MapperObject
     [Serializable]
     public class GraphGUI : Object
     {
-        public object Instance;
         [CustomMapping("m_Graph")] public Graph Graph;
     }
 }

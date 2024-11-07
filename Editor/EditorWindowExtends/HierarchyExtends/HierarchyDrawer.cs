@@ -1,9 +1,7 @@
 using System;
-using UnityEditor;
 using UnityEngine;
 using Yueby.EditorWindowExtends.Core;
 using Yueby.EditorWindowExtends.HierarchyExtends.Core;
-using Yueby.EditorWindowExtends.Utils;
 
 namespace Yueby.EditorWindowExtends.HierarchyExtends
 {

@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using Yueby.EditorWindowExtends.AnimatorControllerToolExtends.Core;
+using Yueby.EditorWindowExtends.AnimatorWindowExtends.Core;
 using Yueby.EditorWindowExtends.Core;
 using Yueby.EditorWindowExtends.HarmonyPatches.MapperObject;
 
-namespace Yueby.EditorWindowExtends.AnimatorControllerToolExtends
+namespace Yueby.EditorWindowExtends.AnimatorWindowExtends
 {
     public class GraphGUIExtender : EditorExtender<GraphGUIExtender, GraphGUIDrawer>
     {

@@ -1,5 +1,5 @@
 using UnityEngine;
-using Yueby.EditorWindowExtends.AnimatorControllerToolExtends.Core;
+using Yueby.EditorWindowExtends.AnimatorWindowExtends.Core;
 using Yueby.EditorWindowExtends.HarmonyPatches.MapperObject;
 using Yueby.Utils;
 

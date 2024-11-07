@@ -1,11 +1,11 @@
 ﻿using System;
 using UnityEditor;
-using Yueby.EditorWindowExtends.AnimatorControllerToolExtends.Reflections;
+using Yueby.EditorWindowExtends.AnimatorWindowExtends.Reflections;
 
-namespace Yueby.EditorWindowExtends.AnimatorControllerToolExtends
+namespace Yueby.EditorWindowExtends.AnimatorWindowExtends
 {
     [InitializeOnLoad]
-    public static class AnimatorControllerToolHelper
+    public static class AnimatorWindowHelper
     {
         // public delegate void DoGraphToolbarDelegate(Rect rect);
 
@@ -37,7 +37,7 @@ namespace Yueby.EditorWindowExtends.AnimatorControllerToolExtends
             {
                 if (_window == null)
                 {
-                    _window = (EditorWindow)AnimatorControllerToolReflect.ToolFieldInfo.GetValue(null);
+                    _window = (EditorWindow)AnimatorWindowReflect.ToolFieldInfo.GetValue(null);
                 }
 
                 return _window;
@@ -45,7 +45,7 @@ namespace Yueby.EditorWindowExtends.AnimatorControllerToolExtends
         }
 
 
-        static AnimatorControllerToolHelper()
+        static AnimatorWindowHelper()
         {
             EditorApplication.update += Update;
         }

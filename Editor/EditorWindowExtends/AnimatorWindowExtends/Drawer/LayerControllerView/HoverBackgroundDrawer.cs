@@ -1,10 +1,10 @@
 ﻿using UnityEditorInternal;
 using UnityEngine;
-using Yueby.EditorWindowExtends.AnimatorControllerToolExtends.Core;
+using Yueby.EditorWindowExtends.AnimatorWindowExtends.Core;
 using Yueby.EditorWindowExtends.Reflections;
 using Yueby.EditorWindowExtends.Utils;
 
-namespace Yueby.EditorWindowExtends.AnimatorControllerToolExtends.Drawer.LayerControllerView
+namespace Yueby.EditorWindowExtends.AnimatorWindowExtends.Drawer.LayerControllerView
 {
     public class HoverBackgroundDrawer : LayerControllerViewDrawer
     {

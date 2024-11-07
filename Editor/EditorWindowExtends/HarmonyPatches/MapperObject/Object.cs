@@ -7,8 +7,11 @@ namespace Yueby.EditorWindowExtends.HarmonyPatches.MapperObject
     [Serializable]
     public class Object
     {
-        [CustomMapping("m_InstanceID")] public int InstanceID;
-        [CustomMapping("name")] public string Name { get; set; }
+        [CustomMapping("m_InstanceID")]
+        public int InstanceID;
+
+        [CustomMapping("name")]
+        public string Name { get; set; }
 
         public object Instance;
     }

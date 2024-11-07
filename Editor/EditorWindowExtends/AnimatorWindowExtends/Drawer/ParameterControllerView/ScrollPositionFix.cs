@@ -1,9 +1,9 @@
 ﻿using UnityEditorInternal;
 using UnityEngine;
-using Yueby.EditorWindowExtends.AnimatorControllerToolExtends.Core;
-using Yueby.EditorWindowExtends.AnimatorControllerToolExtends.Reflections;
+using Yueby.EditorWindowExtends.AnimatorWindowExtends.Core;
+using Yueby.EditorWindowExtends.AnimatorWindowExtends.Reflections;
 
-namespace Yueby.EditorWindowExtends.AnimatorControllerToolExtends.Drawer.ParameterControllerView
+namespace Yueby.EditorWindowExtends.AnimatorWindowExtends.Drawer.ParameterControllerView
 {
     public class ScrollPositionFix : ParameterControllerViewDrawer
     {
@@ -34,7 +34,7 @@ namespace Yueby.EditorWindowExtends.AnimatorControllerToolExtends.Drawer.Paramet
                     _scrollPosition.y = y;
                 }
 
-                ParameterControllerViewReflect.SetParameterScrollPosition(AnimatorControllerToolHelper.Window, _scrollPosition);
+                ParameterControllerViewReflect.SetParameterScrollPosition(AnimatorWindowHelper.Window, _scrollPosition);
 
                 _lastCount = ReorderableList.list.Count;
             }

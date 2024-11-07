@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEditor.Compilation;
 using UnityEngine;
-using Yueby.EditorWindowExtends.AnimatorControllerToolExtends;
+using Yueby.EditorWindowExtends.AnimatorWindowExtends;
 using Yueby.EditorWindowExtends.Core;
 using Yueby.EditorWindowExtends.HierarchyExtends;
 using Yueby.EditorWindowExtends.ProjectBrowserExtends;

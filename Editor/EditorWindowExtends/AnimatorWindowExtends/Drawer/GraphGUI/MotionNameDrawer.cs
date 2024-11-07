@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using Yueby.EditorWindowExtends.AnimatorControllerToolExtends.Core;
+using Yueby.EditorWindowExtends.AnimatorWindowExtends.Core;
 using Yueby.EditorWindowExtends.HarmonyPatches.MapperObject;
 
-namespace Yueby.EditorWindowExtends.AnimatorControllerToolExtends.Drawer.GraphGUI
+namespace Yueby.EditorWindowExtends.AnimatorWindowExtends.Drawer.GraphGUI
 {
     public class MotionNameDrawer : GraphGUIDrawer
     {

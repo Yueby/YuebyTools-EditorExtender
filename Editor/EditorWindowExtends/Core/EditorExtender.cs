@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using UnityEditor;
+using UnityEngine;
 using Yueby.Core.Utils;
+using Logger = Yueby.Core.Utils.Logger;
 
 namespace Yueby.EditorWindowExtends.Core
 {
@@ -46,16 +49,7 @@ namespace Yueby.EditorWindowExtends.Core
 
         protected EditorExtender() // 注意构造函数名称
         {
-            foreach (var drawerType in GetAllDrawerTypes())
-            {
-                var drawer = (TDrawer)Activator.CreateInstance(drawerType);
-
-                // 强制转换 this 为 TExtender
-                drawer?.Init((TExtender)this);
-                ExtenderDrawers.Add(drawer);
-            }
-
-            SortByIndex();
+            InitializeDrawers();
             // OptionModalDrawer = new ExtenderOptionModalWindowDrawer<TExtender, TDrawer>(ExtenderDrawers, this);
         }
 
@@ -88,7 +82,19 @@ namespace Yueby.EditorWindowExtends.Core
 
         public virtual void SetEnable(bool value)
         {
-            IsEnabled = value;
+            if(IsEnabled == value) return;
+            
+            using(PerformanceTracker.Track("SetEnable"))
+            {
+                IsEnabled = value;
+                if(value)
+                    OnEnable();
+                else 
+                    OnDisable();
+                    
+                OnEnableChanged?.Invoke(value);
+                Repaint();
+            }
         }
 
         public virtual void Repaint()
@@ -106,5 +112,78 @@ namespace Yueby.EditorWindowExtends.Core
         // {
         //     ModalEditorWindow.ShowUtility(OptionModalDrawer, showFocusCenter: false);
         // }
+
+        protected virtual void OnEnable() {}
+        protected virtual void OnDisable() {}
+
+        private Dictionary<Type, TDrawer> _drawerCache = new();
+
+        protected virtual void InitializeDrawers()
+        {
+            try {
+                foreach (var drawerType in GetAllDrawerTypes())
+                {
+                    if(_drawerCache.ContainsKey(drawerType)) continue;
+                    
+                    var drawer = (TDrawer)Activator.CreateInstance(drawerType);
+                    drawer?.Init((TExtender)this);
+                    ExtenderDrawers.Add(drawer);
+                    _drawerCache[drawerType] = drawer;
+                }
+                SortByIndex();
+            }
+            catch (Exception ex) {
+                Logger.LogException(ex, "Failed to initialize drawers");
+            }
+        }
+
+        protected virtual void UpdateDrawers()
+        {
+            if(!IsEnabled) return;
+            foreach(var drawer in ExtenderDrawers.Where(d => d.IsVisible))
+            {
+                drawer.OnUpdate();
+            }
+        }
+
+        // 1. 添加事件系统
+        public event Action<bool> OnEnableChanged;
+        public event Action OnRepaint;
+        
+        // 2. 添加绘制器管理
+        private readonly HashSet<Type> _activeDrawerTypes = new();
+        
+        // 3. 改进性能监控
+        protected readonly EditorPerformanceTracker PerformanceTracker = new();
+        
+        // 4. 添加配置管理
+        protected virtual string ConfigPath => $"EditorExtender.{Name}";
+        protected T GetConfig<T>(string key, T defaultValue = default) => 
+            EditorPrefs.HasKey($"{ConfigPath}.{key}") ? 
+                JsonUtility.FromJson<T>(EditorPrefs.GetString($"{ConfigPath}.{key}")) : 
+                defaultValue;
+                
+        protected void SetConfig<T>(string key, T value) => 
+            EditorPrefs.SetString($"{ConfigPath}.{key}", JsonUtility.ToJson(value));
+
+        // 5. 添加绘制器查找方法
+        public TDrawer GetDrawer<T>() where T : TDrawer
+        {
+            return _drawerCache.Values.FirstOrDefault(d => d is T);
+        }
+
+        // 6. 添加批量操作方法
+        public void EnableDrawers(params Type[] drawerTypes)
+        {
+            foreach(var type in drawerTypes)
+            {
+                if(_drawerCache.TryGetValue(type, out var drawer))
+                {
+                    drawer.ChangeVisible(true);
+                    _activeDrawerTypes.Add(type);
+                }
+            }
+            Repaint();
+        }
     }
 }

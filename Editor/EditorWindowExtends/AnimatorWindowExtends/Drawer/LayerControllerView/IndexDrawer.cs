@@ -1,9 +1,9 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using Yueby.EditorWindowExtends.AnimatorControllerToolExtends.Core;
+using Yueby.EditorWindowExtends.AnimatorWindowExtends.Core;
 using AnimatorControllerLayer = UnityEditor.Animations.AnimatorControllerLayer;
 
-namespace Yueby.EditorWindowExtends.AnimatorControllerToolExtends.Drawer.LayerControllerView
+namespace Yueby.EditorWindowExtends.AnimatorWindowExtends.Drawer.LayerControllerView
 {
     public class IndexDrawer : LayerControllerViewDrawer
     {

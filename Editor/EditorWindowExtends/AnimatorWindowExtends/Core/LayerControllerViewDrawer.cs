@@ -2,14 +2,14 @@
 using UnityEngine;
 using Yueby.EditorWindowExtends.Core;
 
-namespace Yueby.EditorWindowExtends.AnimatorControllerToolExtends.Core
+namespace Yueby.EditorWindowExtends.AnimatorWindowExtends.Core
 {
-    public class ParameterControllerViewDrawer : EditorExtenderDrawer<ParameterControllerViewExtender, ParameterControllerViewDrawer>
+    public class LayerControllerViewDrawer : EditorExtenderDrawer<LayerControllerViewExtender, LayerControllerViewDrawer>
     {
         public ReorderableList ReorderableList { get; private set; }
 
 
-        public virtual void Init(ParameterControllerViewExtender extender, ReorderableList reorderableList)
+        public virtual void Init(LayerControllerViewExtender extender, ReorderableList reorderableList)
         {
             base.Init(extender);
             ReorderableList = reorderableList;

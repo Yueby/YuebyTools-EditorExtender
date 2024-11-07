@@ -1,11 +1,5 @@
 using UnityEngine;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Yueby.Core.Utils;
 using UnityEditor;
-using Logger = Yueby.Core.Utils.Logger;
 
 namespace Yueby.EditorWindowExtends.HierarchyExtends.Core
 {

@@ -1,14 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-
-using Yueby.EditorWindowExtends.HierarchyExtends;
 using Yueby.EditorWindowExtends.HierarchyExtends.Core;
-using Yueby.Utils;
-using Yueby.Core.Utils;
-using Logger = Yueby.Core.Utils.Logger;
-using Yueby.EditorWindowExtends.Utils;
 using Yueby.EditorWindowExtends.Core;
 
 namespace Yueby.EditorWindowExtends.HierarchyExtends.Drawer

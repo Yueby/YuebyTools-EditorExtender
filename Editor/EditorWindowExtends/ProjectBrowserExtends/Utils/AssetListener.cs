@@ -27,9 +27,7 @@ namespace Yueby.EditorWindowExtends.ProjectBrowserExtends
             HasNewAsset = false;
         }
 
-        public ProjectBrowserAsset()
-        {
-        }
+        public ProjectBrowserAsset() { }
 
         public ProjectBrowserAsset FindByGuid(string guid)
         {
@@ -110,7 +108,9 @@ namespace Yueby.EditorWindowExtends.ProjectBrowserExtends
             for (var i = 1; i < pathParts.Length; i++)
             {
                 var part = pathParts[i];
-                var foundChild = currentAsset.Children.Find(child => child.Name.Equals(part, System.StringComparison.OrdinalIgnoreCase));
+                var foundChild = currentAsset.Children.Find(child =>
+                    child.Name.Equals(part, System.StringComparison.OrdinalIgnoreCase)
+                );
 
                 if (foundChild == null)
                 {
@@ -118,7 +118,9 @@ namespace Yueby.EditorWindowExtends.ProjectBrowserExtends
                     var instanceId = AssetDatabase.AssetPathToGUID(currentPath);
                     foundChild = new ProjectBrowserAsset(currentPath, instanceId)
                     {
-                        Parent = currentAsset // 设置 Parent 属性
+                        Parent =
+                            currentAsset // 设置 Parent 属性
+                        ,
                     };
                     currentAsset.Children.Add(foundChild);
                     currentAsset._childrenDict[foundChild.Guid] = foundChild; // 更新字典
@@ -160,8 +162,10 @@ namespace Yueby.EditorWindowExtends.ProjectBrowserExtends
 
         public void RefreshParent(ProjectBrowserAsset asset)
         {
-            if (asset == null) return;
-            asset.HasNewAsset = asset.IsNewAsset || asset.Children.Exists(child => child.HasNewAsset);
+            if (asset == null)
+                return;
+            asset.HasNewAsset =
+                asset.IsNewAsset || asset.Children.Exists(child => child.HasNewAsset);
             asset.RefreshParent(asset.Parent);
         }
     }
@@ -183,8 +187,14 @@ namespace Yueby.EditorWindowExtends.ProjectBrowserExtends
             Root = new ProjectBrowserAsset("Root", "0");
 
             // 初始化 Assets 和 Packages 文件夹作为子节点
-            var assetsFolder = new ProjectBrowserAsset("Assets", AssetDatabase.AssetPathToGUID("Assets"));
-            var packagesFolder = new ProjectBrowserAsset("Packages", AssetDatabase.AssetPathToGUID("Packages"));
+            var assetsFolder = new ProjectBrowserAsset(
+                "Assets",
+                AssetDatabase.AssetPathToGUID("Assets")
+            );
+            var packagesFolder = new ProjectBrowserAsset(
+                "Packages",
+                AssetDatabase.AssetPathToGUID("Packages")
+            );
 
             Root.Children.Add(assetsFolder);
             Root.Children.Add(packagesFolder);
@@ -214,7 +224,9 @@ namespace Yueby.EditorWindowExtends.ProjectBrowserExtends
             var json = JsonUtility.ToJson(Root, true);
 
             // 获取桌面的路径
-            string desktopPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);
+            string desktopPath = System.Environment.GetFolderPath(
+                System.Environment.SpecialFolder.Desktop
+            );
             // 定义输出的文件路径
             string filePath = Path.Combine(desktopPath, "ProjectBrowserAssets.json");
 
@@ -229,7 +241,12 @@ namespace Yueby.EditorWindowExtends.ProjectBrowserExtends
             Debug.Log($"JSON 数据已输出到: {filePath}"); // 在控制台打印输出文件路径
         }
 
-        static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
+        static void OnPostprocessAllAssets(
+            string[] importedAssets,
+            string[] deletedAssets,
+            string[] movedAssets,
+            string[] movedFromAssetPaths
+        )
         {
             var importedNewAssets = new List<ProjectBrowserAsset>();
 
@@ -239,7 +256,8 @@ namespace Yueby.EditorWindowExtends.ProjectBrowserExtends
                 if (asset.StartsWith("Assets/"))
                 {
                     // 向 Assets 文件夹添加资产，并返回新资产
-                    var newAssets = Root.FindByGuid(AssetDatabase.AssetPathToGUID("Assets"))?.AddAssetToTree(asset);
+                    var newAssets = Root.FindByGuid(AssetDatabase.AssetPathToGUID("Assets"))
+                        ?.AddAssetToTree(asset);
                     if (newAssets != null)
                     {
                         importedNewAssets.AddRange(newAssets);
@@ -248,7 +266,8 @@ namespace Yueby.EditorWindowExtends.ProjectBrowserExtends
                 else if (asset.StartsWith("Packages/"))
                 {
                     // 向 Packages 文件夹添加资产，并返回新资产
-                    var newAssets = Root.FindByGuid(AssetDatabase.AssetPathToGUID("Packages"))?.AddAssetToTree(asset);
+                    var newAssets = Root.FindByGuid(AssetDatabase.AssetPathToGUID("Packages"))
+                        ?.AddAssetToTree(asset);
                     if (newAssets != null)
                     {
                         importedNewAssets.AddRange(newAssets);
@@ -269,14 +288,16 @@ namespace Yueby.EditorWindowExtends.ProjectBrowserExtends
                 {
                     // 从 Assets 文件夹中删除资产
                     var removedAssetGuid = AssetDatabase.AssetPathToGUID(deletedAsset);
-                    Root.FindByGuid(AssetDatabase.AssetPathToGUID("Assets"))?.RemoveByGuid(removedAssetGuid);
+                    Root.FindByGuid(AssetDatabase.AssetPathToGUID("Assets"))
+                        ?.RemoveByGuid(removedAssetGuid);
                     ProjectBrowserExtender.Instance.RemoveAssetItem(removedAssetGuid);
                 }
                 else if (deletedAsset.StartsWith("Packages/"))
                 {
                     // 从 Packages 文件夹中删除资产
                     var removedAssetGuid = AssetDatabase.AssetPathToGUID(deletedAsset);
-                    Root.FindByGuid(AssetDatabase.AssetPathToGUID("Packages"))?.RemoveByGuid(removedAssetGuid);
+                    Root.FindByGuid(AssetDatabase.AssetPathToGUID("Packages"))
+                        ?.RemoveByGuid(removedAssetGuid);
                     ProjectBrowserExtender.Instance.RemoveAssetItem(removedAssetGuid);
                 }
             }
@@ -286,7 +307,8 @@ namespace Yueby.EditorWindowExtends.ProjectBrowserExtends
 
         public static void ClearAsset(ProjectBrowserAsset asset)
         {
-            if (asset == null) return;
+            if (asset == null)
+                return;
 
             // 将当前资产的 IsNewAsset 设置为 false
             asset.SetNewAsset(false); // 会更新资产并调用 RefreshParent
@@ -297,6 +319,5 @@ namespace Yueby.EditorWindowExtends.ProjectBrowserExtends
                 ClearAsset(child); // 递归清理子节点
             }
         }
-
     }
 }

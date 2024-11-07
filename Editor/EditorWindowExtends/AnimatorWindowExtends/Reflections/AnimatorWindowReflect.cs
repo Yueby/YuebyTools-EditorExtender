@@ -2,9 +2,9 @@
 using System.Reflection;
 using HarmonyLib;
 
-namespace Yueby.EditorWindowExtends.AnimatorControllerToolExtends.Reflections
+namespace Yueby.EditorWindowExtends.AnimatorWindowExtends.Reflections
 {
-    public static class AnimatorControllerToolReflect
+    public static class AnimatorWindowReflect
     {
         public static readonly Type Type = AccessTools.TypeByName("UnityEditor.Graphs.AnimatorControllerTool");
         public static readonly FieldInfo LayerEditor = AccessTools.Field(Type, "m_LayerEditor");

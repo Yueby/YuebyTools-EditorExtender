@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
-using Yueby.EditorWindowExtends.AnimatorControllerToolExtends.Core;
+using Yueby.EditorWindowExtends.AnimatorWindowExtends.Core;
+using Yueby.EditorWindowExtends.AnimatorWindowExtends.Reflections;
 using Yueby.EditorWindowExtends.Core;
 
-namespace Yueby.EditorWindowExtends.AnimatorControllerToolExtends
+namespace Yueby.EditorWindowExtends.AnimatorWindowExtends
 {
     [InitializeOnLoad]
     public class LayerControllerViewExtender : EditorExtender<LayerControllerViewExtender, LayerControllerViewDrawer>
@@ -17,14 +17,14 @@ namespace Yueby.EditorWindowExtends.AnimatorControllerToolExtends
 
         static LayerControllerViewExtender()
         {
-            AnimatorControllerToolHelper.OnAnimatorControllerToolState += OnAnimatorControllerToolState;
+            AnimatorWindowHelper.OnAnimatorControllerToolState += OnAnimatorControllerToolState;
         }
 
         public LayerControllerViewExtender()
         {
-            if (AnimatorControllerToolHelper.Window == null) return;
+            if (AnimatorWindowHelper.Window == null) return;
 
-            _lastList = LayerControllerViewReflect.GetLayerReorderableList(AnimatorControllerToolHelper.Window);
+            _lastList = LayerControllerViewReflect.GetLayerReorderableList(AnimatorWindowHelper.Window);
             if (_lastList == null)
             {
                 // Debug.LogWarning("Can't find layer list, try recreate extender.");
@@ -61,7 +61,7 @@ namespace Yueby.EditorWindowExtends.AnimatorControllerToolExtends
         private static void OnAnimatorControllerToolState(bool state)
         {
             if (state)
-                // if (_lastList != ParameterControllerViewReflect.GetParameterReorderableList(AnimatorControllerToolHelper.Window))
+                // if (_lastList != ParameterControllerViewReflect.GetParameterReorderableList(AnimatorWindowHelper.Window))
                 //     _extender = null;
                 Instance ??= new LayerControllerViewExtender();
             else
@@ -72,13 +72,13 @@ namespace Yueby.EditorWindowExtends.AnimatorControllerToolExtends
         {
             if (!IsEnabled) return;
 
-            ScrollPosition = LayerControllerViewReflect.GetLayerScrollPosition(AnimatorControllerToolHelper.Window);
+            ScrollPosition = LayerControllerViewReflect.GetLayerScrollPosition(AnimatorWindowHelper.Window);
 
             foreach (var drawer in ExtenderDrawers.Where(drawer => drawer.IsVisible)) drawer.OnDrawElement(rect, index, isactive, isfocused);
 
             if (_lastIndex == index) return;
             _lastIndex = index;
-            AnimatorControllerToolHelper.Window.Repaint();
+            AnimatorWindowHelper.Window.Repaint();
         }
 
         private void OnDrawElementBackground(Rect rect, int index, bool isactive, bool isfocused)
@@ -133,7 +133,7 @@ namespace Yueby.EditorWindowExtends.AnimatorControllerToolExtends
         public override void Repaint()
         {
             base.Repaint();
-            AnimatorControllerToolHelper.Window?.Repaint();
+            AnimatorWindowHelper.Window?.Repaint();
         }
     }
 }

@@ -1,11 +1,7 @@
 ﻿using UnityEditor;
 using UnityEditor.IMGUI.Controls;
-using UnityEngine;
-using Yueby.Core.Utils;
-using Yueby.EditorWindowExtends.Core;
 using Yueby.EditorWindowExtends.ProjectBrowserExtends.Core;
 using Yueby.EditorWindowExtends.Utils;
-using Logger = Yueby.Core.Utils.Logger;
 
 namespace Yueby.EditorWindowExtends.ProjectBrowserExtends.Drawer
 {

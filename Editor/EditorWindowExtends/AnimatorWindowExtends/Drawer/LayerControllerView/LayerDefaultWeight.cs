@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
-using Yueby.EditorWindowExtends.AnimatorControllerToolExtends.Core;
+using Yueby.EditorWindowExtends.AnimatorWindowExtends.Core;
 using Yueby.Utils.Reflections;
 using AnimatorController = UnityEditor.Animations.AnimatorController;
 using AnimatorControllerLayer = UnityEditor.Animations.AnimatorControllerLayer;
 
 
-namespace Yueby.EditorWindowExtends.AnimatorControllerToolExtends.Drawer.LayerControllerView
+namespace Yueby.EditorWindowExtends.AnimatorWindowExtends.Drawer.LayerControllerView
 {
     public class LayerDefaultWeight : LayerControllerViewDrawer
     {
@@ -25,7 +25,7 @@ namespace Yueby.EditorWindowExtends.AnimatorControllerToolExtends.Drawer.LayerCo
             if (_lastCount < ReorderableList.list.Count)
             {
                 var endIndex = ReorderableList.list.Count - 1;
-                var window = AnimatorControllerToolHelper.Window;
+                var window = AnimatorWindowHelper.Window;
                 var controller = (AnimatorController)window.GetType().GetFieldValue("m_AnimatorController", window);
 
 

@@ -142,18 +142,16 @@ namespace Yueby.EditorWindowExtends.ProjectBrowserExtends
             if (ExtenderDrawers == null)
                 return;
 
-            // SetDirty();
-
-            if (
-                _mouseOverWindow != null
-                && _mouseOverWindow.GetType() == ProjectBrowserReflect.Type
-                && _mouseOverWindow.wantsMouseMove == false
-            )
+            // 确保鼠标悬停窗口的正确性
+            if (_mouseOverWindow != null && _mouseOverWindow.GetType() == ProjectBrowserReflect.Type && !_mouseOverWindow.wantsMouseMove)
+            {
                 _mouseOverWindow.wantsMouseMove = true;
+            }
 
             var needRepaint = false;
             var assetItem = GetAssetItem(guid, rect);
 
+            // 检查是否需要重绘
             if (assetItem.IsHover && _lastHoveredGuid != guid)
             {
                 _lastHoveredGuid = guid;
@@ -162,8 +160,11 @@ namespace Yueby.EditorWindowExtends.ProjectBrowserExtends
 
             callback?.Invoke(assetItem);
 
+            // 如果需要重绘，执行重绘
             if (needRepaint && _mouseOverWindow != null)
+            {
                 _mouseOverWindow.Repaint();
+            }
         }
 
         private AssetItem GetAssetItem(string guid, Rect rect)

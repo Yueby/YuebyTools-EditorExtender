@@ -2,7 +2,7 @@
 using Yueby.EditorWindowExtends.Core;
 using Yueby.EditorWindowExtends.HarmonyPatches.MapperObject;
 
-namespace Yueby.EditorWindowExtends.AnimatorControllerToolExtends.Core
+namespace Yueby.EditorWindowExtends.AnimatorWindowExtends.Core
 {
     public class GraphGUIDrawer : EditorExtenderDrawer<GraphGUIExtender, GraphGUIDrawer>
     {

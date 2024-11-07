@@ -1,10 +1,9 @@
 ﻿using UnityEditorInternal;
 using UnityEngine;
-using Yueby.Core.Utils;
-using Yueby.EditorWindowExtends.AnimatorControllerToolExtends.Core;
-using Logger = Yueby.Core.Utils.Logger;
+using Yueby.EditorWindowExtends.AnimatorWindowExtends.Core;
+using Yueby.EditorWindowExtends.AnimatorWindowExtends.Reflections;
 
-namespace Yueby.EditorWindowExtends.AnimatorControllerToolExtends.Drawer.LayerControllerView
+namespace Yueby.EditorWindowExtends.AnimatorWindowExtends.Drawer.LayerControllerView
 {
     public class ScrollPositionFix : LayerControllerViewDrawer
     {
@@ -39,7 +38,7 @@ namespace Yueby.EditorWindowExtends.AnimatorControllerToolExtends.Drawer.LayerCo
                 _lastCount = ReorderableList.list.Count;
             }
 
-            LayerControllerViewReflect.SetLayerScrollPosition(AnimatorControllerToolHelper.Window, _scrollPosition);
+            LayerControllerViewReflect.SetLayerScrollPosition(AnimatorWindowHelper.Window, _scrollPosition);
         }
     }
 }
