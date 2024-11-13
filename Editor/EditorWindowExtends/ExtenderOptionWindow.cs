@@ -63,12 +63,12 @@ namespace Yueby.EditorWindowExtends
     {
         public ReorderableListDroppable List;
         public IEditorExtender Extender;
-        private int _clickedIndex;
 
         public ExtenderOptionHandler(IEditorExtender extender)
         {
             Extender = extender;
             List = SetupList(extender);
+            List.List.draggable = false;
         }
 
 
@@ -76,25 +76,16 @@ namespace Yueby.EditorWindowExtends
         {
             return new ReorderableListDroppable(extender.Drawers, typeof(IEditorExtenderDrawer), EditorGUIUtility.singleLineHeight, null, false, false)
             {
-                OnDraw = OnListDraw,
-                OnChanged = OnListChanged,
+                OnDraw = OnListDraw
             };
         }
 
-        private async void OnListChanged(int index)
-        {
-            Extender.Drawers[index].ChangeOrder(_clickedIndex);
-            Extender.Drawers[_clickedIndex].ChangeOrder(index);
 
-
-            Extender.Drawers = Extender.Drawers;
-        }
 
         private float OnListDraw(Rect rect, int index, bool arg3, bool arg4)
         {
             if (Event.current.type == EventType.MouseDown && rect.Contains(Event.current.mousePosition))
             {
-                _clickedIndex = index;
             }
 
             var singleLineHeight = EditorGUIUtility.singleLineHeight;
@@ -106,7 +97,7 @@ namespace Yueby.EditorWindowExtends
 
             EditorGUI.LabelField(labelRect, new GUIContent(item.DrawerName, item.Tooltip));
 
-            EditorGUI.LabelField(new Rect(rect.x + rect.width - singleLineHeight, rect.y, 20, singleLineHeight), item.Order.ToString());
+            
             return singleLineHeight;
         }
 

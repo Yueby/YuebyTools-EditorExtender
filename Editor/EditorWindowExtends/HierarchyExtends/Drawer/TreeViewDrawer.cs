@@ -9,7 +9,7 @@ namespace Yueby.EditorWindowExtends.HierarchyExtends.Drawer
 {
     public class TreeViewDrawer : HierarchyDrawer
     {
-        public override int DefaultOrder => 4;
+        protected override int DefaultOrder => 50;
         private const float LineWidth = 1.2f;
 
         private SelectionItem _endItem;

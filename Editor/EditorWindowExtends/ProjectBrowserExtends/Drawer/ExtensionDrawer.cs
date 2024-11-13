@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.IO;
-
 using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
@@ -24,6 +23,7 @@ namespace Yueby.EditorWindowExtends.ProjectBrowserExtends.Drawer
 {
     public class ExtensionDrawer : ProjectBrowserDrawer
     {
+        protected override int DefaultOrder => 0;
         public override string DrawerName => "Extension Label";
 
         private static GUIStyle _style;

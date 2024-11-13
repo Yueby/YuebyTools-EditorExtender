@@ -6,6 +6,7 @@ namespace Yueby.EditorWindowExtends.AnimatorWindowExtends.Drawer.GraphGUI
 {
     public class MotionNameDrawer : GraphGUIDrawer
     {
+        protected override int DefaultOrder => 0;
         public override string DrawerName => "Display Motion Name";
         public override string Tooltip => "Display the name of the motion in the state node";
 

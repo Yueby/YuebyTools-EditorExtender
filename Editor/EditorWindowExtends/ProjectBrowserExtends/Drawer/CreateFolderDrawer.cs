@@ -7,7 +7,7 @@ namespace Yueby.EditorWindowExtends.ProjectBrowserExtends.Drawer
     public class CreateFolderDrawer : ProjectBrowserDrawer
     {
         public override string DrawerName => "Create Folder Button";
-        public override int DefaultOrder => 1;
+        protected override int DefaultOrder => 0;
 
         public override void OnProjectBrowserGUI(AssetItem item)
         {

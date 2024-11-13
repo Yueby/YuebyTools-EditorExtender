@@ -7,7 +7,7 @@ namespace Yueby.EditorWindowExtends.ProjectBrowserExtends.Drawer
 {
     public class TreeViewDrawer : ProjectBrowserDrawer
     {
-
+        protected override int DefaultOrder => 1000;
         public override string DrawerName => "TreeView Line";
 
         private const float LineWidth = 1.2f;

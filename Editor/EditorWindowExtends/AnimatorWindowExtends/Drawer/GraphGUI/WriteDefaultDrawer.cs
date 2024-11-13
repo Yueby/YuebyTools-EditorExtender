@@ -5,6 +5,8 @@ using Yueby.Utils;
 
 public class WriteDefaultDrawer : GraphGUIDrawer
 {
+    protected override int DefaultOrder => 1;
+
     public override void OnDrawGraphGUI(GraphGUI graphGUI, StateNode stateNode)
     {
         base.OnDrawGraphGUI(graphGUI, stateNode);
@@ -32,7 +34,6 @@ public class WriteDefaultDrawer : GraphGUIDrawer
                     Event.current.Use();
                 }
             });
-
         }
 
         GUI.Label(wdLabelRect, label, Styles.WdLabelStyle);

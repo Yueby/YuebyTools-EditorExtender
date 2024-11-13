@@ -8,7 +8,7 @@ namespace Yueby.EditorWindowExtends.HierarchyExtends.Drawer
     public class BackgroundDrawer : HierarchyDrawer
     {
         public override string DrawerName => "Background";
-        public override int DefaultOrder => 0;
+        protected override int DefaultOrder => 0;
 
         public override void OnHierarchyWindowItemGUI(SelectionItem selectionItem)
         {

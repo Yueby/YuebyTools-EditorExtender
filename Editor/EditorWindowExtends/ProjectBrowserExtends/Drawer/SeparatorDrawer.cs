@@ -8,6 +8,7 @@ namespace Yueby.EditorWindowExtends.ProjectBrowserExtends.Drawer
 {
     public class SeparatorDrawer : ProjectBrowserDrawer
     {
+        protected override int DefaultOrder => 100;
         public override string DrawerName => "Separator";
 
         public override void OnProjectBrowserObjectAreaItemBackgroundGUI(AssetItem item)

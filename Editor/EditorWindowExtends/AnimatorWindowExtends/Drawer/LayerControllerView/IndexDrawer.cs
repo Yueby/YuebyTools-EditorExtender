@@ -6,7 +6,7 @@ using AnimatorControllerLayer = UnityEditor.Animations.AnimatorControllerLayer;
 namespace Yueby.EditorWindowExtends.AnimatorWindowExtends.Drawer.LayerControllerView
 {
     public class IndexDrawer : LayerControllerViewDrawer
-    {
+    {protected override int DefaultOrder => 1;
         private GUIStyle _indexLabelStyleGray;
 
         private GUIStyle _indexLabelStyleWhite;

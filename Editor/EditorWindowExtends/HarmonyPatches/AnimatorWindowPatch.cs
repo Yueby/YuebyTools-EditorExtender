@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using HarmonyLib;
 using UnityEngine;
 using Yueby.EditorWindowExtends.AnimatorWindowExtends;
@@ -22,7 +23,7 @@ namespace Yueby.EditorWindowExtends.HarmonyPatches
 
         public static event Action<GraphGUI, StateNode> OnDrawStateNode;
 
-        protected override void ApplyPatch(Harmony harmony)
+        protected override async Task ApplyPatch(Harmony harmony)
         {
             var onGraphGUIMethodPrefix = AccessTools.Method(
                 typeof(AnimatorWindowPatch),

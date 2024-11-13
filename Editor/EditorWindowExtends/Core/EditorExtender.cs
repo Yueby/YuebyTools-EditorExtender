@@ -56,11 +56,6 @@ namespace Yueby.EditorWindowExtends.Core
         private void SortByIndex()
         {
             ExtenderDrawers.Sort((a, b) => a.Order.CompareTo(b.Order));
-            for (var i = 0; i < ExtenderDrawers.Count; i++)
-            {
-                ExtenderDrawers[i].ChangeOrder(i);
-            }
-
         }
 
         private IEnumerable<Type> GetAllDrawerTypes()
@@ -82,17 +77,16 @@ namespace Yueby.EditorWindowExtends.Core
 
         public virtual void SetEnable(bool value)
         {
-            if(IsEnabled == value) return;
-            
-            using(PerformanceTracker.Track("SetEnable"))
+            if (IsEnabled == value) return;
+
+            using (PerformanceTracker.Track("SetEnable"))
             {
                 IsEnabled = value;
-                if(value)
+                if (value)
                     OnEnable();
-                else 
+                else
                     OnDisable();
-                    
-                OnEnableChanged?.Invoke(value);
+                
                 Repaint();
             }
         }
@@ -113,57 +107,60 @@ namespace Yueby.EditorWindowExtends.Core
         //     ModalEditorWindow.ShowUtility(OptionModalDrawer, showFocusCenter: false);
         // }
 
-        protected virtual void OnEnable() {}
-        protected virtual void OnDisable() {}
+        protected virtual void OnEnable()
+        {
+        }
+
+        protected virtual void OnDisable()
+        {
+        }
 
         private Dictionary<Type, TDrawer> _drawerCache = new();
 
         protected virtual void InitializeDrawers()
         {
-            try {
+            try
+            {
                 foreach (var drawerType in GetAllDrawerTypes())
                 {
-                    if(_drawerCache.ContainsKey(drawerType)) continue;
-                    
+                    if (_drawerCache.ContainsKey(drawerType)) continue;
+
                     var drawer = (TDrawer)Activator.CreateInstance(drawerType);
                     drawer?.Init((TExtender)this);
                     ExtenderDrawers.Add(drawer);
                     _drawerCache[drawerType] = drawer;
                 }
+
                 SortByIndex();
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 Logger.LogException(ex, "Failed to initialize drawers");
             }
         }
 
         protected virtual void UpdateDrawers()
         {
-            if(!IsEnabled) return;
-            foreach(var drawer in ExtenderDrawers.Where(d => d.IsVisible))
+            if (!IsEnabled) return;
+            foreach (var drawer in ExtenderDrawers.Where(d => d.IsVisible))
             {
                 drawer.OnUpdate();
             }
         }
 
-        // 1. 添加事件系统
-        public event Action<bool> OnEnableChanged;
-        public event Action OnRepaint;
-        
-        // 2. 添加绘制器管理
+
         private readonly HashSet<Type> _activeDrawerTypes = new();
-        
-        // 3. 改进性能监控
+
+
         protected readonly EditorPerformanceTracker PerformanceTracker = new();
-        
-        // 4. 添加配置管理
+
+
         protected virtual string ConfigPath => $"EditorExtender.{Name}";
-        protected T GetConfig<T>(string key, T defaultValue = default) => 
-            EditorPrefs.HasKey($"{ConfigPath}.{key}") ? 
-                JsonUtility.FromJson<T>(EditorPrefs.GetString($"{ConfigPath}.{key}")) : 
-                defaultValue;
-                
-        protected void SetConfig<T>(string key, T value) => 
+
+        protected T GetConfig<T>(string key, T defaultValue = default) =>
+            EditorPrefs.HasKey($"{ConfigPath}.{key}") ? JsonUtility.FromJson<T>(EditorPrefs.GetString($"{ConfigPath}.{key}")) : defaultValue;
+
+        protected void SetConfig<T>(string key, T value) =>
             EditorPrefs.SetString($"{ConfigPath}.{key}", JsonUtility.ToJson(value));
 
         // 5. 添加绘制器查找方法
@@ -175,14 +172,15 @@ namespace Yueby.EditorWindowExtends.Core
         // 6. 添加批量操作方法
         public void EnableDrawers(params Type[] drawerTypes)
         {
-            foreach(var type in drawerTypes)
+            foreach (var type in drawerTypes)
             {
-                if(_drawerCache.TryGetValue(type, out var drawer))
+                if (_drawerCache.TryGetValue(type, out var drawer))
                 {
                     drawer.ChangeVisible(true);
                     _activeDrawerTypes.Add(type);
                 }
             }
+
             Repaint();
         }
     }

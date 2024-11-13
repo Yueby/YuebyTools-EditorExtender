@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using System.Threading.Tasks;
+using HarmonyLib;
 using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 using Yueby.EditorWindowExtends.HarmonyPatches.Core;
@@ -8,8 +9,9 @@ namespace Yueby.EditorWindowExtends.HarmonyPatches
 {
     public class ProjectBrowserPatch : BasePatch
     {
-        protected override void ApplyPatch(Harmony harmony)
+        protected override async Task ApplyPatch(Harmony harmony)
         {
+            await Task.Delay(10);
             // Patch ProjectBrowserColumnOneTreeViewGUI.OnRowGUI
             var onDoItemGUIMethod = AccessTools.Method(
                 typeof(ProjectBrowserPatch),

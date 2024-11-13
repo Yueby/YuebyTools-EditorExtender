@@ -10,6 +10,7 @@ namespace Yueby.EditorWindowExtends.ProjectBrowserExtends.Drawer
 {
     public class HoverDrawer : ProjectBrowserDrawer
     {
+        protected override int DefaultOrder => -1;
         public override string DrawerName => "Hover Background";
         public override string Tooltip => "Draw a background when hovering over an item in the project browser.";
         private Rect _hoverRect;

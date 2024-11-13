@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using HarmonyLib;
 using UnityEngine;
 using Yueby.Core.Utils;
@@ -16,7 +17,7 @@ namespace Yueby.EditorWindowExtends.HarmonyPatches.Core
 
         public virtual void OnDisabled() { }
 
-        protected abstract void ApplyPatch(Harmony harmony);
+        protected abstract Task ApplyPatch(Harmony harmony);
 
         protected virtual void HandlePatchError(Exception ex)
         {
@@ -24,14 +25,14 @@ namespace Yueby.EditorWindowExtends.HarmonyPatches.Core
             IsEnabled = false;
         }
 
-        internal void Apply(Harmony harmony)
+        internal async Task Apply(Harmony harmony)
         {
             if (IsEnabled)
                 return;
 
             try
             {
-                ApplyPatch(harmony);
+                await ApplyPatch(harmony);
                 IsEnabled = true;
                 OnEnabled();
             }

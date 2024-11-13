@@ -7,7 +7,7 @@ using Yueby.EditorWindowExtends.Utils;
 namespace Yueby.EditorWindowExtends.AnimatorWindowExtends.Drawer.LayerControllerView
 {
     public class HoverBackgroundDrawer : LayerControllerViewDrawer
-    {
+    {protected override int DefaultOrder => 0;
         public override string DrawerName => "Hover Background";
 
         public override string Tooltip => "Draws a background when hovering over an item in the layer list";

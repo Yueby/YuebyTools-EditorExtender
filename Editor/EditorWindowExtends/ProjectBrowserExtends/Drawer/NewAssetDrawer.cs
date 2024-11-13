@@ -8,7 +8,7 @@ namespace Yueby.EditorWindowExtends.ProjectBrowserExtends.Drawer
     {
         public override string DrawerName => "New Asset Dot";
         public override string Tooltip => "Create a new asset in the project browser";
-        public override int DefaultOrder => 2;
+        protected override int DefaultOrder => 1;
 
         public override void OnProjectBrowserGUI(AssetItem item)
         {

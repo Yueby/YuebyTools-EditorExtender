@@ -7,8 +7,8 @@ namespace Yueby.EditorWindowExtends.HierarchyExtends.Drawer
 {
     public class ActiveDrawer : HierarchyDrawer
     {
-        public override int DefaultOrder => 1;
-        private DrawerIconContent _visibleIconContent = new(EditorGUIUtility.IconContent("animationvisibilitytoggleon@2x"), EditorGUIUtility.IconContent("animationvisibilitytoggleoff@2x"));
+        protected override int DefaultOrder => 1;
+        private readonly DrawerIconContent _visibleIconContent = new(EditorGUIUtility.IconContent("animationvisibilitytoggleon@2x"), EditorGUIUtility.IconContent("animationvisibilitytoggleoff@2x"));
         // private DrawerIconContent _visibleHoverIconContent = new(EditorGUIUtility.IconContent("animationvisibilitytoggleon@2x"), EditorGUIUtility.IconContent("animationvisibilitytoggleoff@2x"));
 
         public override void OnHierarchyWindowItemGUI(SelectionItem selectionItem)

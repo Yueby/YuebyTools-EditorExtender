@@ -8,7 +8,6 @@
         string Tooltip { get; }
 
         void ChangeVisible(bool value);
-        void ChangeOrder(int value);
         void Repaint();
     }
 }

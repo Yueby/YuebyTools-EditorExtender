@@ -29,7 +29,7 @@ namespace Yueby.EditorWindowExtends.HarmonyPatches
             {
                 EditorApplication.update -= OnUpdate;
                 await Task.Delay(TimeSpan.FromSeconds(1f));
-                ApplyPatches();
+                await ApplyPatches();
             }
             catch (Exception ex)
             {
@@ -39,7 +39,9 @@ namespace Yueby.EditorWindowExtends.HarmonyPatches
 
         private static void RegisterAllPatches()
         {
-            var patchTypes = Assembly.GetExecutingAssembly().GetTypes()
+            var patchTypes = Assembly
+                .GetExecutingAssembly()
+                .GetTypes()
                 .Where(t => !t.IsAbstract && typeof(BasePatch).IsAssignableFrom(t));
 
             foreach (var type in patchTypes)
@@ -71,14 +73,15 @@ namespace Yueby.EditorWindowExtends.HarmonyPatches
                 patch.OnDisabled();
         }
 
-        public static void RegisterPatch<T>() where T : BasePatch, new()
+        public static void RegisterPatch<T>()
+            where T : BasePatch, new()
         {
             var type = typeof(T);
             if (!_patches.ContainsKey(type))
                 _patches[type] = new T();
         }
 
-        internal static void ApplyPatches()
+        internal static async Task ApplyPatches()
         {
             _harmony = new Harmony("yueby.tools.core");
 
@@ -89,7 +92,7 @@ namespace Yueby.EditorWindowExtends.HarmonyPatches
             {
                 try
                 {
-                    patch.Apply(_harmony);
+                    await patch.Apply(_harmony);
                     _initializedCount++;
                 }
                 catch (Exception)
@@ -107,6 +110,7 @@ namespace Yueby.EditorWindowExtends.HarmonyPatches
 
         internal static void UnpatchAll()
         {
+            Logger.LogInfo("Unpatching all patches");
             _harmony?.UnpatchAll();
         }
     }

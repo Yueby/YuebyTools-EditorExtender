@@ -30,7 +30,9 @@ namespace Yueby.EditorWindowExtends.Core
             }
         }
 
-        protected virtual void OnInitialize() { }
+        protected virtual void OnInitialize()
+        {
+        }
 
         // 3. 添加资源清理
         public virtual void Cleanup()
@@ -40,7 +42,9 @@ namespace Yueby.EditorWindowExtends.Core
             OnCleanup();
         }
 
-        protected virtual void OnCleanup() { }
+        protected virtual void OnCleanup()
+        {
+        }
 
         // 4. 添加性能监控
         private System.Diagnostics.Stopwatch _stopwatch = new();
@@ -72,17 +76,9 @@ namespace Yueby.EditorWindowExtends.Core
             }
         }
 
-        public int Order
-        {
-            get
-            {
-                var order = EditorPrefs.GetInt($"{SavePath}.Order", DefaultOrder);
+        public int Order => DefaultOrder;
 
-                return order;
-            }
-        }
-
-        public virtual int DefaultOrder { get; } = 0;
+        protected virtual int DefaultOrder { get; } = 0;
         public virtual string DrawerName { get; } = "";
         public virtual string Tooltip { get; } = "";
 
@@ -97,18 +93,14 @@ namespace Yueby.EditorWindowExtends.Core
             Repaint();
         }
 
-        public void ChangeOrder(int value)
-        {
-            EditorPrefs.SetInt($"{SavePath}.Order", value);
-
-            Repaint();
-        }
 
         public void Repaint()
         {
             Extender.Repaint();
         }
 
-        public virtual void OnUpdate() { }
+        public virtual void OnUpdate()
+        {
+        }
     }
 }

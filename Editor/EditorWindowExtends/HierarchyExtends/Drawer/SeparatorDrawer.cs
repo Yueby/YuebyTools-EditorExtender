@@ -8,7 +8,7 @@ namespace Yueby.EditorWindowExtends.HierarchyExtends.Drawer
     public class SeparatorDrawer : HierarchyDrawer
     {
         public override string DrawerName => "Separator";
-        public override int DefaultOrder => 3;
+        protected override int DefaultOrder => 100;
 
         public override void OnHierarchyWindowItemGUI(SelectionItem selectionItem)
         {
