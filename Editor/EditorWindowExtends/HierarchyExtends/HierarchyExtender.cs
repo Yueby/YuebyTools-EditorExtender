@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using Yueby.EditorWindowExtends.Core;
 using Yueby.EditorWindowExtends.HierarchyExtends.Core;
+using Logger = Yueby.Core.Utils.Logger;
 
 namespace Yueby.EditorWindowExtends.HierarchyExtends
 {
@@ -17,6 +18,8 @@ namespace Yueby.EditorWindowExtends.HierarchyExtends
         public static HierarchyExtender Instance { get; private set; }
 
         public ActiveObjectHandler ActiveObjectHandler { get; set; } = null;
+
+        private EditorWindow _lastWindow;
 
         static HierarchyExtender()
         {
@@ -78,7 +81,22 @@ namespace Yueby.EditorWindowExtends.HierarchyExtends
             }
         }
 
-        private void OnUpdate() { }
+        private void OnUpdate()
+        {
+            if (EditorWindow.mouseOverWindow != null && EditorWindow.mouseOverWindow != _lastWindow)
+            {
+                if (_lastWindow && _lastWindow.GetType().FullName == "UnityEditor.SceneHierarchyWindow")
+                {
+                    if (ActiveObjectHandler != null)
+                    {
+                        ActiveObjectHandler = null;
+                    }
+                }
+                
+                _lastWindow = EditorWindow.mouseOverWindow;
+                // Logger.LogInfo(_lastWindow.GetType().FullName);
+            }
+        }
 
         private SelectionItem GetSelectionItem(int instanceID, Rect rect)
         {
