@@ -16,6 +16,8 @@ namespace Yueby.EditorWindowExtends.HierarchyExtends
 
         public static HierarchyExtender Instance { get; private set; }
 
+        public ActiveObjectHandler ActiveObjectHandler { get; set; } = null;
+
         static HierarchyExtender()
         {
             Instance = new HierarchyExtender();
@@ -51,8 +53,10 @@ namespace Yueby.EditorWindowExtends.HierarchyExtends
 
         private void OnHierarchyChanged()
         {
-            if (!Instance.IsEnabled) return;
-            if (Instance is { ExtenderDrawers: null }) return;
+            if (!Instance.IsEnabled)
+                return;
+            if (Instance is { ExtenderDrawers: null })
+                return;
 
             foreach (var drawer in ExtenderDrawers.Where(d => d is { IsVisible: true }))
             {
@@ -62,21 +66,19 @@ namespace Yueby.EditorWindowExtends.HierarchyExtends
 
         private void OnHierarchyWindowItemGUI(int instanceID, Rect selectionRect)
         {
-            if (!Instance.IsEnabled) return;
-            if (Instance is { ExtenderDrawers: null }) return;
+            if (!Instance.IsEnabled)
+                return;
+            if (Instance is { ExtenderDrawers: null })
+                return;
 
             var selectionItem = GetSelectionItem(instanceID, selectionRect);
             foreach (var drawer in ExtenderDrawers.Where(d => d is { IsVisible: true }))
             {
                 drawer.OnHierarchyWindowItemGUI(selectionItem);
             }
-
         }
 
-        private void OnUpdate()
-        {
-
-        }
+        private void OnUpdate() { }
 
         private SelectionItem GetSelectionItem(int instanceID, Rect rect)
         {
@@ -104,6 +106,11 @@ namespace Yueby.EditorWindowExtends.HierarchyExtends
         {
             EditorApplication.RepaintHierarchyWindow();
         }
-
     }
+}
+
+public class ActiveObjectHandler
+{
+    public bool Active;
+    public GameObject LastGameObject;
 }
