@@ -10,6 +10,7 @@ namespace Yueby.EditorWindowExtends.HierarchyExtends.Drawer
     public class ActiveDrawer : HierarchyDrawer
     {
         protected override int DefaultOrder => 1;
+
         private readonly DrawerIconContent _visibleIconContent =
             new(
                 EditorGUIUtility.IconContent("animationvisibilitytoggleon@2x"),
@@ -45,7 +46,7 @@ namespace Yueby.EditorWindowExtends.HierarchyExtends.Drawer
 
                     EditorGUI.BeginDisabledGroup(
                         !selectionItem.TargetObject.activeSelf
-                            || !selectionItem.TargetObject.activeInHierarchy
+                        || !selectionItem.TargetObject.activeInHierarchy
                     );
                     EditorGUIUtility.SetIconSize(new Vector2(height - 2, height - 2));
                     GUI.Label(
@@ -81,13 +82,14 @@ namespace Yueby.EditorWindowExtends.HierarchyExtends.Drawer
                         if (
                             Extender.ActiveObjectHandler != null
                             && Extender.ActiveObjectHandler.LastGameObject
-                                != selectionItem.TargetObject
+                            != selectionItem.TargetObject
                         )
                         {
                             selectionItem.TargetObject.SetActive(
                                 Extender.ActiveObjectHandler.Active
                             );
-                            Event.current.Use();
+                            if (Event.current.type != EventType.Layout)
+                                Event.current.Use();
                             Extender.ActiveObjectHandler.LastGameObject =
                                 selectionItem.TargetObject;
                         }

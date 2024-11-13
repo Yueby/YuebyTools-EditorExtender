@@ -74,5 +74,10 @@ namespace Yueby.EditorWindowExtends.HarmonyPatches
             _stateNodeCaches.Clear();
             OnDrawStateNode = null;
         }
+
+        private static void OnOnDrawStateNode(GraphGUI arg1, StateNode arg2)
+        {
+            OnDrawStateNode?.Invoke(arg1, arg2);
+        }
     }
 }

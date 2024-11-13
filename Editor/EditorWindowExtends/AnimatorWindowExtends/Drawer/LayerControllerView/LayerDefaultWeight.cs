@@ -15,7 +15,7 @@ namespace Yueby.EditorWindowExtends.AnimatorWindowExtends.Drawer.LayerController
         private Vector2 _scrollPosition;
         private int _lastCount;
 
-        public override async void OnDrawElement(Rect rect, int index, bool isactive, bool isfocused)
+        public override void OnDrawElement(Rect rect, int index, bool isactive, bool isfocused)
         {
             base.OnDrawElement(rect, index, isactive, isfocused);
 
