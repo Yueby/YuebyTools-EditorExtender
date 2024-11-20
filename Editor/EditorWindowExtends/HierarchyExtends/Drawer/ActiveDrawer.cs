@@ -88,7 +88,7 @@ namespace Yueby.EditorWindowExtends.HierarchyExtends.Drawer
                             selectionItem.TargetObject.SetActive(
                                 Extender.ActiveObjectHandler.Active
                             );
-                            if (Event.current.type != EventType.Layout)
+                            if (Event.current.type != EventType.Layout && Event.current.type != EventType.Repaint)
                                 Event.current.Use();
                             Extender.ActiveObjectHandler.LastGameObject =
                                 selectionItem.TargetObject;
