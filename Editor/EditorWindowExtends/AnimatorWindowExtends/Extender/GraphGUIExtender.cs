@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using UnityEditor;
 using Yueby.EditorWindowExtends.AnimatorWindowExtends.Core;
 using Yueby.EditorWindowExtends.Core;
 using Yueby.EditorWindowExtends.HarmonyPatches.MapperObject;
@@ -18,7 +19,18 @@ namespace Yueby.EditorWindowExtends.AnimatorWindowExtends
 
         public static void OnDrawStateNode(GraphGUI graphGUI, StateNode stateNode)
         {
-            foreach (var drawer in Instance.ExtenderDrawers.Where(drawer => drawer.IsVisible)) drawer.OnDrawGraphGUI(graphGUI, stateNode);
+            foreach (var drawer in Instance.ExtenderDrawers.Where(drawer => drawer.IsVisible))
+            {
+                drawer.OnDrawGraphGUI(graphGUI, stateNode);
+            }
+
+            // if (
+            //     EditorWindow.mouseOverWindow != null
+            //     && EditorWindow.mouseOverWindow.GetType().Name == "AnimatorControllerTool"
+            // )
+            // {
+            //     EditorWindow.mouseOverWindow.Repaint();
+            // }
         }
     }
 }

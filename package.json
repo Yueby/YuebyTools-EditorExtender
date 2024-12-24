@@ -1,7 +1,7 @@
 {
   "name": "yueby.tools.editor-extender",
   "displayName": "Yueby Tools - Editor Extender",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A editor window extender tool for Unity.",
   "author": {
     "name": "Yueby",
