@@ -3,7 +3,6 @@ using UnityEngine;
 using Yueby.Core.Utils;
 using Yueby.EditorWindowExtends.Core;
 using Yueby.EditorWindowExtends.HierarchyExtends.Core;
-using Logger = Yueby.Core.Utils.Logger;
 
 namespace Yueby.EditorWindowExtends.HierarchyExtends.Drawer
 {

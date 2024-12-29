@@ -5,7 +5,6 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using Yueby.Core.Utils;
-using Logger = Yueby.Core.Utils.Logger;
 
 namespace Yueby.EditorWindowExtends.Core
 {
@@ -135,7 +134,7 @@ namespace Yueby.EditorWindowExtends.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex, "Failed to initialize drawers");
+                YuebyLogger.LogException(ex, "Failed to initialize drawers");
             }
         }
 

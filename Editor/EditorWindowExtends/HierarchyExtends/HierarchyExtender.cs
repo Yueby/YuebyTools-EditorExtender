@@ -4,7 +4,6 @@ using UnityEditor;
 using UnityEngine;
 using Yueby.EditorWindowExtends.Core;
 using Yueby.EditorWindowExtends.HierarchyExtends.Core;
-using Logger = Yueby.Core.Utils.Logger;
 
 namespace Yueby.EditorWindowExtends.HierarchyExtends
 {

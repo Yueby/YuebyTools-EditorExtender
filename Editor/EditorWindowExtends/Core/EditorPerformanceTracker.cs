@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Yueby.Core.Utils;
-using Logger = Yueby.Core.Utils.Logger;
 
 public class EditorPerformanceTracker
 {
@@ -31,7 +30,7 @@ public class EditorPerformanceTracker
                 _averageTimes[operation] = avg;
                 
                 if(avg > 16) // 1帧的时间
-                    Logger.LogWarning($"{operation} average time: {avg}ms");
+                    YuebyLogger.LogWarning($"{operation} average time: {avg}ms");
             }
             
             watch.Reset();

@@ -7,7 +7,6 @@ using UnityEngine;
 using Yueby.Core.Utils;
 using Yueby.EditorWindowExtends.Core;
 using Yueby.EditorWindowExtends.ProjectBrowserExtends.Core;
-using Logger = Yueby.Core.Utils.Logger;
 
 namespace Yueby.EditorWindowExtends.ProjectBrowserExtends
 {

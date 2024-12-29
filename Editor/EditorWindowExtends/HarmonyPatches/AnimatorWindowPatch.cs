@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using HarmonyLib;
 using UnityEngine;
+using Yueby.Core.Utils;
 using Yueby.EditorWindowExtends.AnimatorWindowExtends;
 using Yueby.EditorWindowExtends.AnimatorWindowExtends.Reflections;
 using Yueby.EditorWindowExtends.HarmonyPatches.Core;
 using Yueby.EditorWindowExtends.HarmonyPatches.MapperObject;
 using Yueby.Utils.Reflections;
-using Logger = Yueby.Core.Utils.Logger;
 using Object = UnityEngine.Object;
 
 namespace Yueby.EditorWindowExtends.HarmonyPatches
@@ -52,7 +52,7 @@ namespace Yueby.EditorWindowExtends.HarmonyPatches
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex, "Failed to map GraphGUI");
+                YuebyLogger.LogException(ex, "Failed to map GraphGUI");
             }
         }
 

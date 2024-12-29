@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using HarmonyLib;
 using UnityEngine;
 using Yueby.Core.Utils;
-using Logger = Yueby.Core.Utils.Logger;
 
 namespace Yueby.EditorWindowExtends.HarmonyPatches.Core
 {
@@ -21,7 +20,7 @@ namespace Yueby.EditorWindowExtends.HarmonyPatches.Core
 
         protected virtual void HandlePatchError(Exception ex)
         {
-            Logger.LogException(ex, $"[{PatchId}] Patch failed");
+            YuebyLogger.LogException(ex, $"[{PatchId}] Patch failed");
             IsEnabled = false;
         }
 
@@ -55,7 +54,7 @@ namespace Yueby.EditorWindowExtends.HarmonyPatches.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex, $"[{PatchId}] Cleanup failed");
+                YuebyLogger.LogException(ex, $"[{PatchId}] Cleanup failed");
             }
         }
     }

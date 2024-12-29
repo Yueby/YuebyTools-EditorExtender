@@ -33,7 +33,7 @@ namespace Yueby.EditorWindowExtends.HarmonyPatches
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex, "Failed to apply patches");
+                YuebyLogger.LogException(ex, "Failed to apply patches");
             }
         }
 
@@ -102,7 +102,7 @@ namespace Yueby.EditorWindowExtends.HarmonyPatches
             }
 
             if (_initializedCount == _patches.Count)
-                Logger.LogInfo("All patches applied.");
+                YuebyLogger.LogInfo("All patches applied.");
 
             AssemblyReloadEvents.beforeAssemblyReload -= UnpatchAll;
             AssemblyReloadEvents.beforeAssemblyReload += UnpatchAll;
@@ -110,7 +110,7 @@ namespace Yueby.EditorWindowExtends.HarmonyPatches
 
         internal static void UnpatchAll()
         {
-            Logger.LogInfo("Unpatching all patches");
+            YuebyLogger.LogInfo("Unpatching all patches");
             _harmony?.UnpatchAll();
         }
     }

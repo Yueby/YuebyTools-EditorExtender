@@ -26,7 +26,7 @@ namespace Yueby.EditorWindowExtends.Core
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex, $"Failed to initialize drawer: {GetType().Name}");
+                YuebyLogger.LogException(ex, $"Failed to initialize drawer: {GetType().Name}");
             }
         }
 
@@ -55,7 +55,7 @@ namespace Yueby.EditorWindowExtends.Core
         {
             _stopwatch.Stop();
             if (_stopwatch.ElapsedMilliseconds > 100)
-                Logger.LogWarning(
+                YuebyLogger.LogWarning(
                     $"{GetType().Name} {operation} took {_stopwatch.ElapsedMilliseconds}ms"
                 );
             _stopwatch.Reset();
